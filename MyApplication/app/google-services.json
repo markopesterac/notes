@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "120076473266",
+    "firebase_url": "https://minionotes.firebaseio.com",
+    "project_id": "minionotes",
+    "storage_bucket": "minionotes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120076473266:android:02a7396e07b846fd",
+        "android_client_info": {
+          "package_name": "rs.elfak.mosis.marko.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120076473266-73kh7k4u30inqppkteq0l3thk8sh7bn2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rs.elfak.mosis.marko.myapplication",
+            "certificate_hash": "aef584cf475adbc23dc12722e6eb560a56b5952b"
+          }
+        },
+        {
+          "client_id": "120076473266-er383umhkisl0fp5lehajepkv5sq783a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwZiUwuKJbhyGF3Y28_WczIGetorcgbq4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120076473266-er383umhkisl0fp5lehajepkv5sq783a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
