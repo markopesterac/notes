@@ -29,7 +29,6 @@ public class ListNotesActivity extends AppCompatActivity {
     ListView listview;
     List<Note> list;
     List<String> notesID;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,6 @@ public class ListNotesActivity extends AppCompatActivity {
         Intent i=getIntent();
         username=i.getStringExtra("username");
         // FUNKCIJA KOJA VRACA LISTU NOTES
-
         getNotes();
     }
 

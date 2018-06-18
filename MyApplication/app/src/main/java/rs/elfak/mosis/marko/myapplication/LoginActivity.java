@@ -46,15 +46,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-  /*      final Button buttonOpenNote=(Button)findViewById(R.id.button6);
-        buttonOpenNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent note = new Intent(LoginActivity.this.getApplicationContext(),ListNotesActivity.class);
-                startActivity(note);
-            }
-        });*/
-
         final Button buttonLogin = (Button) findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,23 +63,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-       Button openMain= (Button) findViewById(R.id.button2);
-        openMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openMain=new Intent(LoginActivity.this.getApplicationContext(),MainActivity.class);
-                startActivity(openMain);
-            }
-        });
-
-    /*    Button openAddNote= (Button) findViewById(R.id.button3);
-        openAddNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent openAddNote=new Intent(LoginActivity.this.getApplicationContext(),AddNotes.class);
-                startActivity(openAddNote);
-            }
-        });*/
     }
 
 
@@ -125,10 +99,10 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //dodatak za putextra
-                            Intent main = new Intent(LoginActivity.this.getApplicationContext(), ListNotesActivity.class);
+                            Intent LN = new Intent(LoginActivity.this.getApplicationContext(), ListNotesActivity.class);
                             String username=mAuth.getCurrentUser().getUid().toString();
-                            main.putExtra("username",username);
-                            LoginActivity.this.startActivity(main);
+                            LN.putExtra("username",username);
+                            LoginActivity.this.startActivity(LN);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

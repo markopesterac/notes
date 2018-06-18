@@ -8,7 +8,16 @@
     android:orientation="vertical"
     tools:context="rs.elfak.mosis.marko.myapplication.LoginActivity">
 
-    <EditText
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+
+        <EditText
         android:id="@+id/editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,10 +45,8 @@
         android:layout_height="wrap_content"
         android:text="Register" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+
+</LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

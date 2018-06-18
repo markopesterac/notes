@@ -57,14 +57,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static rs.elfak.mosis.marko.myapplication.R.id.videoView;
+//import static rs.elfak.mosis.marko.myapplication.R.id.videoView;
 
 public class ShowNoteActivity extends AppCompatActivity {
 
-   // private static final String PHOTO_URL="http://10.10.1.114:45455/Home/Upload";
-    //private static final String LOAD_IMAGE_URL="http://10.10.1.114:45455/Home/Load";
-    private static final String PHOTO_URL="http://192.168.0.100:45455/Home/Upload";
-    private static final String LOAD_IMAGE_URL="http://192.168.0.100:45455/Home/Load";
+  //  private static final String PHOTO_URL="http://10.10.1.115:45455/Home/Upload";
+   // private static final String LOAD_IMAGE_URL="http://10.10.1.115:45455/Home/Load";
+   // private static final String DELETE_IMAGE_URL="http://10.14.68.200:45455/Home/DeleteObject";
+    private static final String PHOTO_URL="http://10.14.92.163:45455/Home/Upload";
+    private static final String LOAD_IMAGE_URL="http://10.14.92.163:45455/Home/Load";
+    private static final String DELETE_IMAGE_URL="http://10.14.92.163:45455/Home/DeleteObject";
     private static String username = "";
     private static String noteID = "";
     ProgressDialog pDialog;
@@ -133,12 +135,6 @@ public class ShowNoteActivity extends AppCompatActivity {
 
 
 
-    public void deleteNote()
-    {
-
-    }
-
-
     public void getNoteInfo(final String id)
     {
         dref = FirebaseDatabase.getInstance().getReference("user/"+username);
@@ -188,7 +184,7 @@ public class ShowNoteActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(ShowNoteActivity.this);
-            pDialog.setMessage("Load images...");
+            pDialog.setMessage("Loading...");
             pDialog.show();
         }
 
@@ -330,14 +326,15 @@ public class ShowNoteActivity extends AppCompatActivity {
         switch (requestCode) {
 
             case ACTIVITY_START_VIDEO:
-                if(requestCode==ACTIVITY_START_VIDEO && resultCode==RESULT_OK)
+                if(requestCode==ACTIVITY_START_VIDEO && resultCode==RESULT_OK )
                 {
                     //iz uria vadi bitmapu
-                    Uri videoUri= data.getData();
                     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                     name = "VID_" + timeStamp + ".mp4";
 
+                    Uri videoUri= data.getData();
                     byte[] vb=convertVideoToBytes(videoUri);
+                    byte[] vvb=vb;
                     imageEncoded = Base64.encodeToString(vb, Base64.DEFAULT);
                     encodedImages.add(imageEncoded);
 
@@ -520,6 +517,13 @@ public class ShowNoteActivity extends AppCompatActivity {
                             if(noteID.equals(id)) {
                                 dref.child(id).removeValue();
 
+                                List<String> objects=new ArrayList();
+                                objects=note.getSlike();
+                                for(int i=0;i<objects.size();i++) {
+                                    String[] obj=objects.get(i).split("/");
+                                    String object=obj[1];
+                                    new DeleteObject().execute(object);
+                                }
                             }
                         }
                     }
@@ -541,6 +545,83 @@ public class ShowNoteActivity extends AppCompatActivity {
                 return true;
         }
         return true;
+    }
+
+
+
+    private class DeleteObject extends  AsyncTask<String,Void,String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog=new ProgressDialog(ShowNoteActivity.this);
+            pDialog.setMessage("Deleting...");
+            pDialog.show();
+        }
+
+        protected String doInBackground (String... args)
+        {
+            InputStream inputStream = null;
+            String result = "";
+            String name=args[0];
+            try {
+
+                URL url = new URL(DELETE_IMAGE_URL);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+
+                StringBuilder result1 = new StringBuilder();
+                result1.append(URLEncoder.encode("username", "UTF-8"));
+                result1.append("=");
+                result1.append(URLEncoder.encode(username, "UTF-8"));
+                result1.append("&");
+                result1.append(URLEncoder.encode("name", "UTF-8"));
+                result1.append("=");
+                result1.append(URLEncoder.encode(name, "UTF-8"));
+
+                writer.write(result1.toString());
+                writer.flush();
+                writer.close();
+                os.close();
+
+                conn.connect();
+
+                if (conn.getResponseCode() != 200)
+                    throw new Exception("Failed to connect");
+                inputStream = conn.getInputStream();
+                // convert inputstream to string
+                if (inputStream != null)
+                    result = convertInputStreamToString(inputStream);
+                else
+                    result = "Did not work!";
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+            if (result == "")
+                return null;
+            else
+                return result;
+        }
+
+        protected void onPostExecute(String buckets) {
+            if (buckets != null) {
+                pDialog.dismiss();
+            } else
+            {
+                pDialog.dismiss();
+                pDialog.setMessage("Network Error....");
+                pDialog.show();
+            }
+        }
+
     }
 
 

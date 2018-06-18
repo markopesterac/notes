@@ -17,9 +17,6 @@ import java.util.List;
 
 public class NoteAdapter extends ArrayAdapter<Note> {
 
-    public static final int WRAP_CONTENT_LENGTH = 50;
-
-
    /* public NoteAdapter(Context context, int resource, List<Note> objects) {
         super(context, resource, objects);
     }*/
@@ -40,36 +37,17 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
         Note note=getItem(position);
 
-
         if(note != null) {
             TextView title = (TextView) convertView.findViewById(R.id.list_note_title);
             TextView date = (TextView) convertView.findViewById(R.id.list_note_date);
             TextView content = (TextView) convertView.findViewById(R.id.list_note_content_preview);
 
+            content.setText(note.getText());
             title.setText(note.getTitle());
             date.setText(note.getDateTimeFormatted(getContext()));
-
-            //correctly show preview of the content (not more than 50 char or more than one line!)
-            int toWrap = WRAP_CONTENT_LENGTH;
-            int lineBreakIndex = note.getText().indexOf('\n');
-            //not an elegant series of if statements...needs to be cleaned up!
-            if(note.getText().length() > WRAP_CONTENT_LENGTH || lineBreakIndex < WRAP_CONTENT_LENGTH) {
-                if(lineBreakIndex < WRAP_CONTENT_LENGTH) {
-                    toWrap = lineBreakIndex;
-                }
-                if(toWrap > 0) {
-                    content.setText(note.getText().substring(0, toWrap) + "...");
-                } else {
-                    content.setText(note.getText());
-                }
-            } else { //if less than 50 chars...leave it as is :P
-                content.setText(note.getText());
-            }
         }
-
         return convertView;
     }
-
 }
 
 

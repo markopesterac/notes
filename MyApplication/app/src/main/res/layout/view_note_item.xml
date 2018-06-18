@@ -24,6 +24,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/list_note_content_preview"/>
+        android:id="@+id/list_note_content_preview"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 </LinearLayout>

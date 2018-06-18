@@ -55,8 +55,9 @@ public class AddNoteActivity extends AppCompatActivity{
     ProgressDialog pDialog;
     private Uri selectedImage;
     private static String username = "";
-  //  private static final String PHOTO_URL="http://10.10.1.114:45455/Home/Upload";
-    private static final String PHOTO_URL="http://192.168.0.100:45455/Home/Upload";
+  //  private static final String PHOTO_URL="http://10.10.1.115:45455/Home/Upload";
+  //  private static final String PHOTO_URL="http://192.168.0.103:45455/Home/Upload";
+    private static final String PHOTO_URL="http://10.14.92.163:45455/Home/Upload";
     EditText titleET;
     EditText textET;
     String imageEncoded;
@@ -295,6 +296,7 @@ public class AddNoteActivity extends AppCompatActivity{
                 Intent callVideoIntent=new Intent();
                 callVideoIntent.setAction(MediaStore.ACTION_VIDEO_CAPTURE);
                 startActivityForResult(callVideoIntent,ACTIVITY_START_VIDEO);
+                //
 
                 return true;
         }
