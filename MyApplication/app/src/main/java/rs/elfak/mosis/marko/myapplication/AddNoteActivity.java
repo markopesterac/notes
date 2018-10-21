@@ -55,9 +55,7 @@ public class AddNoteActivity extends AppCompatActivity{
     ProgressDialog pDialog;
     private Uri selectedImage;
     private static String username = "";
-  //  private static final String PHOTO_URL="http://10.10.1.115:45455/Home/Upload";
-  //  private static final String PHOTO_URL="http://192.168.0.103:45455/Home/Upload";
-    private static final String PHOTO_URL="http://10.14.92.163:45455/Home/Upload";
+    private static final String PHOTO_URL="http://192.168.43.95:45455/Home/Upload";
     EditText titleET;
     EditText textET;
     String imageEncoded;
@@ -235,7 +233,7 @@ public class AddNoteActivity extends AppCompatActivity{
                 slike=minioPaths;
                 boolean enable=true;
                 String timeStamp = new SimpleDateFormat("dd-MMM-yyyy hh:mm aa").format(new Date());
-                String date=timeStamp;
+                String date = timeStamp;
 
                 Note note = new Note();
 
@@ -256,8 +254,7 @@ public class AddNoteActivity extends AppCompatActivity{
                     String objName=s[s.length-1];
                     new UploadPhoto().execute(encodedImages.get(i),objName);
                 }
-               // Toast.makeText(AddNoteActivity.this, "Uspesno ste dodali spot", Toast.LENGTH_SHORT).show();
-                //dodaju extras
+
                 Intent ln = new Intent(AddNoteActivity.this.getApplicationContext(), ListNotesActivity.class);
                 ln.putExtra("username",username);
                 startActivity(ln);

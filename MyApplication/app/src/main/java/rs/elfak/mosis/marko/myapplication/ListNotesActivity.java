@@ -68,8 +68,6 @@ public class ListNotesActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
-
     });
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){

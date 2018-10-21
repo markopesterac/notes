@@ -61,12 +61,9 @@ import java.util.List;
 
 public class ShowNoteActivity extends AppCompatActivity {
 
-  //  private static final String PHOTO_URL="http://10.10.1.115:45455/Home/Upload";
-   // private static final String LOAD_IMAGE_URL="http://10.10.1.115:45455/Home/Load";
-   // private static final String DELETE_IMAGE_URL="http://10.14.68.200:45455/Home/DeleteObject";
-    private static final String PHOTO_URL="http://10.14.92.163:45455/Home/Upload";
-    private static final String LOAD_IMAGE_URL="http://10.14.92.163:45455/Home/Load";
-    private static final String DELETE_IMAGE_URL="http://10.14.92.163:45455/Home/DeleteObject";
+    private static final String PHOTO_URL="http://192.168.43.95:45455/Home/Upload";
+    private static final String LOAD_IMAGE_URL="http://192.168.43.95:45455/Home/Load";
+    private static final String DELETE_IMAGE_URL="http://192.168.43.95:45455/Home/DeleteObject";
     private static String username = "";
     private static String noteID = "";
     ProgressDialog pDialog;
@@ -527,12 +524,9 @@ public class ShowNoteActivity extends AppCompatActivity {
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
                     }
-
                 });
 
                 //DELETE FROM MINIO
